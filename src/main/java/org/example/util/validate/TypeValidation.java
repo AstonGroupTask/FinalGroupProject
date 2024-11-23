@@ -4,7 +4,9 @@ public enum TypeValidation {
     STRING(String.class, 1, 99, true, "^[A-Za-z0-9]+$"),  
     INT(Integer.class, 0, 2000, false, null), 
     FLOAT(Float.class, 0.0f, 100.0f, false, null), 
-    BOOLEAN(Boolean.class, 0, 0, false, null); 
+    BOOLEAN(Boolean.class, 0, 0, false, null),
+	
+	VARIANTS(Integer.class, 1, 3, false, null);
 
     private final Class<?> type;
     private final Object min;
