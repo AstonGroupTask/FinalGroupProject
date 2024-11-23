@@ -1,18 +1,28 @@
 package org.example.util.validate;
 
+import java.util.regex.Pattern;
+
 public class BasicValidators {
 
-    public static String validateString(String input, int minLength, int maxLength, boolean noNull) {
+    public static String validateString(String input, int minLength, int maxLength, boolean noNull, String regex) {
         input = input.trim();
+        
         if (input.isEmpty() && noNull) {
             throw new IllegalArgumentException("Ввод не должен быть пустым. Попробуйте снова.");
         }
+        
         if (input.length() < minLength) {
             throw new IllegalArgumentException("Длина строки должна быть не меньше " + minLength + " символов.");
         }
+        
         if (input.length() > maxLength) {
             throw new IllegalArgumentException("Длина строки не должна превышать " + maxLength + " символов.");
         }
+        
+        if (regex != null && !regex.isEmpty() && !Pattern.matches(regex, input)) {
+            throw new IllegalArgumentException("Строка не соответствует регулярному выражению.");
+        }
+        
         return input;
     }
 
