@@ -1,9 +1,7 @@
-package org.example.BinarySearch;
+package org.example.util;
 
 import java.util.ArrayList;
 import java.util.Random;
-
-import org.example.RandomStringGenerator.RandomStringGenerator;
 
 /**
  * <p>Базовый поиск, с заполнением коллекции для проверки работы алгоритма</p>
