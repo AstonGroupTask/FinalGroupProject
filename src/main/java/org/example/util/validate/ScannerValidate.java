@@ -20,7 +20,11 @@ public class ScannerValidate {
     
     public static void main(String[] args) {
         ScannerValidate scannerValidate = new ScannerValidate();
-
+        
+        System.out.println("Выберите вариант от 1 до 3: ");
+        int validVariant = (int) scannerValidate.getValidValue(TypeValidation.VARIANTS);
+        System.out.println("Вы выбрали вариант: " + validVariant);
+        
         System.out.println("Введите строку (от 1 до 99 символов): ");
         String validString = (String) scannerValidate.getValidValue(TypeValidation.STRING);
         System.out.println("Вы ввели строку: " + validString);
