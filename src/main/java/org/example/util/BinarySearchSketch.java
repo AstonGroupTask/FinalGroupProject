@@ -5,6 +5,7 @@ import java.util.Random;
 
 /**
  * <p>Базовый поиск, с заполнением коллекции для проверки работы алгоритма</p>
+ * @see BinarySearchGeneric
  */
 public final class BinarySearchSketch {
 
