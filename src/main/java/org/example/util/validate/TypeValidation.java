@@ -5,7 +5,9 @@ public enum TypeValidation {
     INT(Integer.class, 0, 2000, false, null), 
     FLOAT(Float.class, 0.0f, 100.0f, false, null), 
     BOOLEAN(Boolean.class, 0, 0, false, null),
-	
+    
+    STRING_FILE_PATH(String.class, 1, 99, true, "^([A-Za-z]:\\\\|/)?([A-Za-z0-9_\\-\\/\\\\.]+(?:[\\/\\\\][A-Za-z0-9_\\-\\.]+)*)$"),
+    STRING_EMPTY(String.class, 1, 99, true, "^[A-Za-z0-9]*$"),
 	VARIANTS_3(Integer.class, 1, 3, false, null),
 	VARIANTS_4(Integer.class, 1, 4, false, null);
 
