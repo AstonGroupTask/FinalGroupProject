@@ -8,9 +8,12 @@ public final class SingletoneArray {
 	private int size;
 	private static final int DEFAULT_CAPACITY = 10;
 
+	private Class<?> storedType;
+
 	private SingletoneArray() {
 		elements = new Object[DEFAULT_CAPACITY];
 		size = 0;
+		storedType = null;
 	}
 
 	public static SingletoneArray getInstance() {
@@ -29,13 +32,23 @@ public final class SingletoneArray {
 	}
 
 	public boolean isEmpty() {
-		return size == 0 ? true : false;
+		return size == 0;
 	}
 
 	public void add(Object element) {
+		if (storedType != null && !storedType.equals(element.getClass())) {
+			throw new IllegalArgumentException(
+					"Cannot add elements of different types. Only " + storedType.getName() + " is allowed.");
+		}
+
+		if (storedType == null) {
+			storedType = element.getClass();
+		}
+
 		if (size == elements.length) {
 			expandArray();
 		}
+
 		elements[size++] = element;
 	}
 
@@ -55,5 +68,12 @@ public final class SingletoneArray {
 		Object[] newArray = new Object[newCapacity];
 		System.arraycopy(elements, 0, newArray, 0, elements.length);
 		elements = newArray;
+	}
+
+	public String getStoredType() {
+		if (size == 0) {
+			return "No elements";
+		}
+		return storedType.getName();
 	}
 }
