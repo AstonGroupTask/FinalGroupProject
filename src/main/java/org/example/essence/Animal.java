@@ -54,7 +54,7 @@ public class Animal implements Comparable<Animal> {
 
     @Override
     public String toString() {
-        return species + eyeColor + hasFur;
+        return species + " " + eyeColor +  " " + hasFur;
 
 
     }

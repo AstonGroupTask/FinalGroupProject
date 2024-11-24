@@ -55,6 +55,6 @@ public class Barrel implements Comparable<Barrel> {
 
     @Override
     public String toString() {
-        return volume + storedMaterial + materialMadeOf;
+        return volume + " " + storedMaterial + " " + materialMadeOf;
     }
 }
