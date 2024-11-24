@@ -50,5 +50,10 @@ public class Human implements Comparable<Human> {
             return new Human(this);
         }
     }
+
+    @Override
+    public String toString() {
+        return  gender + " "  + age + " " + surname;
+    }
 }
 
