@@ -1,6 +1,11 @@
 package org.example.menu;
 
+import org.example.essence.Animal;
+import org.example.essence.Barrel;
+import org.example.essence.Human;
 import org.example.singletoneArray.SingletoneArray;
+import org.example.sorting.stategies.TimSort;
+import org.example.util.randomaizer.RandomEntityGenerator;
 import org.example.util.validate.ScannerValidate;
 import org.example.util.validate.TypeValidation;
 
@@ -41,5 +46,10 @@ public final class SortData extends BaseVariant {
                 break;
             }
         }
+    }
+    
+    public void sort()
+    {
+    	array.sort();
     }
 }

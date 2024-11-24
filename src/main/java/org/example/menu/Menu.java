@@ -29,7 +29,9 @@ public final class Menu {
 		EnterData enterData = new EnterData();
 		SortData sortData = new SortData();
 		SearchData searchData = new SearchData();
-
+		
+		SingletoneArray array = SingletoneArray.getInstance();
+		
 		while (true) {
 			// clearConsole(); TODO doesn't work in eclipse
 			System.out.println("Please, select one of three variants:");
@@ -46,7 +48,7 @@ public final class Menu {
 				enterData.menu();
 				break;
 			case (2):
-				sortData.menu();
+				sortData.sort();
 				break;
 			case (3):
 				searchData.menu();
