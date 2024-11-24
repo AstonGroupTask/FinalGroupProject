@@ -4,6 +4,9 @@ import org.example.essence.Animal;
 import org.example.essence.Barrel;
 import org.example.essence.Human;
 import org.example.singletoneArray.SingletoneArray;
+import org.example.strategies.fill.FillFromFile;
+import org.example.util.randomaizer.RandomEntityArrayFiller;
+import org.example.util.randomaizer.RandomEntityGenerator;
 import org.example.util.validate.TypeValidation;
 
 public final class EnterData extends BaseVariant {
@@ -31,10 +34,10 @@ public final class EnterData extends BaseVariant {
 				manualEntry();
 				break;
 			case (2):
-				// Код2;
+				randomEntry();
 				break;
 			case (3):
-
+				fileEntry();
 				break;
 			default:
 			}
@@ -43,6 +46,89 @@ public final class EnterData extends BaseVariant {
 				break;
 			}
 		}
+	}
+
+	private void fileEntry() {
+		System.out.print("Please, enter your file path: ");
+		String filePath = (String)scannerValidate.getValidValue(TypeValidation.STRING_FILE_PATH);
+
+		FillFromFile<Object> fillStrategy = new FillFromFile<>();
+		Object[] result = fillStrategy.fillFromFile(0, filePath);
+
+		if (result == null)
+		{
+			System.out.print("File reading error");
+			return;
+		}
+		
+		for (Object entity : (Object[]) result[0]) {
+			array.add(entity);
+		}
+		System.out.print("File reading complete");
+	}
+
+	private void randomEntry() {
+		int validVariant = 0;
+		int numberOfEntities = 0;
+		if (array.isEmpty()) {
+			while (validVariant != 4) {
+				System.out.println("Please, select type of entity:");
+				System.out.println(" 1 - Animal");
+				System.out.println(" 2 - Barrel");
+				System.out.println(" 3 - Human");
+				System.out.println(" 4 - Exit");
+
+				System.out.print("Please, enter your chosen action: ");
+				validVariant = (int) scannerValidate.getValidValue(TypeValidation.VARIANTS_4);
+
+				if (validVariant == 4) {
+					System.out.println("Returning to data input menu.");
+					break;
+				}
+
+				System.out.print("Please, enter the number of entities to add: ");
+				numberOfEntities = (int) scannerValidate.getValidValue(TypeValidation.INT);
+
+				if (validVariant == 1) {
+					for (int i = 0; i < numberOfEntities; i++)
+						array.add(RandomEntityGenerator.randomAnimalGenerate());
+
+					break;
+				} else if (validVariant == 2) {
+					for (int i = 0; i < numberOfEntities; i++)
+						array.add(RandomEntityGenerator.randomBarrelGenerate());
+
+					break;
+				} else if (validVariant == 3) {
+					for (int i = 0; i < numberOfEntities; i++)
+						array.add(RandomEntityGenerator.randomHumanGenerate());
+
+					break;
+				}
+			}
+		} else {
+			System.out.println("The array already contains " + array.getStoredType() + ". You can only add more "
+					+ array.getStoredType() + ".");
+
+			System.out.print("Please, enter the number of entities to add: ");
+			numberOfEntities = (int) scannerValidate.getValidValue(TypeValidation.INT);
+
+			Object firstEntity = array.get(0);
+			if (firstEntity instanceof Animal) {
+				for (int i = 0; i < numberOfEntities; i++)
+					array.add(RandomEntityGenerator.randomAnimalGenerate());
+
+			} else if (firstEntity instanceof Barrel) {
+				for (int i = 0; i < numberOfEntities; i++)
+					array.add(RandomEntityGenerator.randomBarrelGenerate());
+
+			} else if (firstEntity instanceof Human) {
+				for (int i = 0; i < numberOfEntities; i++)
+					array.add(RandomEntityGenerator.randomHumanGenerate());
+
+			}
+		}
+		System.out.println("Addition complete");
 	}
 
 	private void manualEntry() {
@@ -78,14 +164,14 @@ public final class EnterData extends BaseVariant {
 			}
 		} else {
 			Object firstEntity = array.get(0);
+			System.out.println("The array already contains " + array.getStoredType() + ". You can only add more "
+					+ array.getStoredType() + ".");
+
 			if (firstEntity instanceof Animal) {
-				System.out.println("The array already contains Animals. You can add more Animals.");
 				handleEntityEntry(this::createAnimalEntry);
 			} else if (firstEntity instanceof Barrel) {
-				System.out.println("The array already contains Barrels. You can add more Barrels.");
 				handleEntityEntry(this::createBarrelEntry);
 			} else if (firstEntity instanceof Human) {
-				System.out.println("The array already contains Humans. You can add more Humans.");
 				handleEntityEntry(this::createHumanEntry);
 			}
 		}
@@ -96,10 +182,11 @@ public final class EnterData extends BaseVariant {
 			entityEntryMethod.run();
 
 			System.out.print(
-					"Do you want to add another entity of the same type? (Type 'No' to stop or 'Yes' to continue): ");
-			String input = scannerValidate.getValidValue(TypeValidation.STRING).toString().trim().toLowerCase();
+					"Do you want to add another entity of the same type? (Type 'Exit' to stop or press Enter to continue): ");
+			String input = (String) scannerValidate.getValidValue(TypeValidation.STRING_EMPTY).toString().trim()
+					.toLowerCase();
 
-			if (input.equals("No")) {
+			if (input.equals("exit")) {
 				System.out.println("Exiting entity creation.");
 				break;
 			}
