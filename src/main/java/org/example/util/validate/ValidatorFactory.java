@@ -20,7 +20,7 @@ public class ValidatorFactory {
 		case "Boolean":
 			return (Validator<Boolean>) (input) -> BasicValidators.validateBoolean(input);
 		default:
-			throw new IllegalArgumentException("Неизвестный тип данных: " + type);
+			throw new IllegalArgumentException("Unknown data type: " + type);
 		}
 	}
 }

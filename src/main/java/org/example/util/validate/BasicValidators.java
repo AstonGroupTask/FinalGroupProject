@@ -3,7 +3,6 @@ package org.example.util.validate;
 import java.util.regex.Pattern;
 
 public class BasicValidators {
-
 	public static String validateString(String input, int minLength, int maxLength, boolean noNull, String regex) {
 		input = input.trim();
 
