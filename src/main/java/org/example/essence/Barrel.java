@@ -12,6 +12,18 @@ public class Barrel implements Comparable<Barrel> {
         this.materialMadeOf = builder.materialMadeOf;
     }
 
+    public double getVolume() {
+        return volume;
+    }
+
+    public String getStoredMaterial() {
+        return storedMaterial;
+    }
+
+    public String getMaterialMadeOf() {
+        return materialMadeOf;
+    }
+
     @Override
     public int compareTo(Barrel o) {
         int volumeComparison = Double.compare(this.volume, o.volume);
