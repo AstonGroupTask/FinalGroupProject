@@ -1,11 +1,8 @@
 package org.example.util.search;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Random;
 
 import org.example.essence.Animal;
-import org.example.util.RandomStringGenerator;
 
 /**
  * <p>Поиск с использованием generics</p>
@@ -18,7 +15,7 @@ public final class BinarySearchGeneric {
 	 * @param collection коллекция
 	 * @param collectionSize количество элементов
 	 * @param searchTarget поисковый запрос
-	 * @return найденая строка либо null
+	 * @return 0 если найдено совпадение либо -1
 	 */
 	public static <E extends Comparable<E>> int binarySearch(E[] collection, Integer collectionSize, E searchTarget) {
 		int leftSearchBound = 0;
@@ -39,20 +36,6 @@ public final class BinarySearchGeneric {
 		}
 
 		return -1;
-	}
-
-	/**
-	 * <p>Для теста поиска</p>
-	 * <p>Заполняет коллекцию рандомными строками</p>
-	 * @param collection коллекция
-	 * @param size количество элементов в коллекции
-	 */
-	public static void populateCollection(ArrayList<String> collection, int size) {
-		Random rng = new Random();
-
-		for (int i = 0; i < size; i++) {
-			collection.add(RandomStringGenerator.generateNewString(rng.nextInt(3, 11)));
-		}
 	}
 
 	// Тест поиска
