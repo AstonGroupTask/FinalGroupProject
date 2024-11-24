@@ -8,19 +8,19 @@ public class BasicValidators {
 		input = input.trim();
 
 		if (input.isEmpty() && noNull) {
-			throw new IllegalArgumentException("Ввод не должен быть пустым. Попробуйте снова.");
+			throwIllegalArgumentException("Input cannot be empty");
 		}
 
 		if (input.length() < minLength) {
-			throw new IllegalArgumentException("Длина строки должна быть не меньше " + minLength + " символов.");
+			throwIllegalArgumentException("The string length must be at least " + minLength + " characters.");
 		}
 
 		if (input.length() > maxLength) {
-			throw new IllegalArgumentException("Длина строки не должна превышать " + maxLength + " символов.");
+			throwIllegalArgumentException("The string length must not exceed " + maxLength + " characters.");
 		}
 
 		if (regex != null && !regex.isEmpty() && !Pattern.matches(regex, input)) {
-			throw new IllegalArgumentException("Строка не соответствует регулярному выражению.");
+			throwIllegalArgumentException("The string does not match the regular expression.");
 		}
 
 		return input;
@@ -30,30 +30,32 @@ public class BasicValidators {
 		try {
 			int number = Integer.parseInt(input);
 			if (number < min) {
-				throw new IllegalArgumentException("Число не может быть меньше " + min + ".");
+				throwIllegalArgumentException("The number cannot be less than " + min + ".");
 			}
 			if (number > max) {
-				throw new IllegalArgumentException("Число не может быть больше " + max + ".");
+				throwIllegalArgumentException("The number cannot be greater than " + max + ".");
 			}
 			return number;
 		} catch (NumberFormatException e) {
-			throw new IllegalArgumentException("Введено неверное число.");
+			throwIllegalArgumentException("Invalid number entered.");
 		}
+		return null; 
 	}
 
 	public static Float validateFloat(String input, float min, float max) {
 		try {
 			float number = Float.parseFloat(input);
 			if (number < min) {
-				throw new IllegalArgumentException("Число не может быть меньше " + min + ".");
+				throwIllegalArgumentException("The number cannot be less than " + min + ".");
 			}
 			if (number > max) {
-				throw new IllegalArgumentException("Число не может быть больше " + max + ".");
+				throwIllegalArgumentException("The number cannot be greater than " + max + ".");
 			}
 			return number;
 		} catch (NumberFormatException e) {
-			throw new IllegalArgumentException("Введено неверное число с плавающей точкой.");
+			throwIllegalArgumentException("Invalid floating point number entered.");
 		}
+		return null;
 	}
 
 	public static Boolean validateBoolean(String input) {
@@ -62,7 +64,12 @@ public class BasicValidators {
 		} else if (input.equalsIgnoreCase("false")) {
 			return false;
 		} else {
-			throw new IllegalArgumentException("Ожидается значение true или false.");
+			throwIllegalArgumentException("Expected value true or false.");
 		}
+		return null;
+	}
+
+	private static void throwIllegalArgumentException(String message) {
+		throw new IllegalArgumentException(message);
 	}
 }

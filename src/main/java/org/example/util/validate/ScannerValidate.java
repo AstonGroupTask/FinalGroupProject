@@ -14,6 +14,7 @@ public class ScannerValidate {
 				return validator.validate(input);
 			} catch (IllegalArgumentException e) {
 				System.out.println(e.getMessage());
+				System.out.print("Please, try again: ");
 			}
 		}
 	}
@@ -22,7 +23,7 @@ public class ScannerValidate {
 		ScannerValidate scannerValidate = new ScannerValidate();
 
 		System.out.println("Выберите вариант от 1 до 3: ");
-		int validVariant = (int) scannerValidate.getValidValue(TypeValidation.VARIANTS);
+		int validVariant = (int) scannerValidate.getValidValue(TypeValidation.VARIANTS_3);
 		System.out.println("Вы выбрали вариант: " + validVariant);
 
 		System.out.println("Введите строку (от 1 до 99 символов): ");
