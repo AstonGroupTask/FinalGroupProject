@@ -1,17 +1,32 @@
 package org.example.essence;
 
-public class Animal implements Comparable<Animal> {
+public class Animal extends Entity<String, String, Boolean> {
     private final String species;
     private final String eyeColor;
-    private final boolean hasFur;
+    private final Boolean hasFur;
 
     private Animal(AnimalBuilder builder) {
+		super(builder.species, builder.eyeColor, builder.hasFur);
         this.species = builder.species;
         this.eyeColor = builder.eyeColor;
         this.hasFur = builder.hasFur;
     }
 
-    @Override
+	@Override
+	public String getFirstParam() {
+		return species;
+	}
+
+	@Override
+	public String getSecondParam() {
+		return eyeColor;
+	}
+
+	@Override
+	public Boolean getThirdParam() {
+		return hasFur;
+	}
+
     public int compareTo(Animal o) {
     	
         int speciesComparison = this.species.compareTo(o.species);
@@ -67,7 +82,5 @@ public class Animal implements Comparable<Animal> {
     @Override
     public String toString() {
         return species + " " + eyeColor +  " " + hasFur;
-
-
     }
 }
