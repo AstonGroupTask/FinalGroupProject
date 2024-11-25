@@ -2,12 +2,14 @@ package org.example.menu.dataSort;
 
 import java.util.Arrays;
 
+import org.example.singletoneArray.SingletoneArray;
+
 public class TimSort implements SortingStrategy<Comparable> {
 	private static final int RUN = 32;
 
 	@Override
 	public void sort(Object[] array) {
-		int n = array.length;
+		int n = SingletoneArray.getInstance().size();
 
 		for (int start = 0; start < n; start += RUN) {
 			int end = Math.min(start + RUN, n);
@@ -30,7 +32,7 @@ public class TimSort implements SortingStrategy<Comparable> {
 		for (int i = left + 1; i < right; i++) {
 			Comparable key = (Comparable) array[i];
 			int j = i - 1;
-
+			
 			while (j >= left && ((Comparable) array[j]).compareTo(key) > 0) {
 				array[j + 1] = array[j];
 				j--;
