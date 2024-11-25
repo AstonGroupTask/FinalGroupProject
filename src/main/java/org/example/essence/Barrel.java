@@ -1,12 +1,12 @@
 package org.example.essence;
 
-public class Barrel implements Comparable<Barrel> {
-    private final double volume;
+public class Barrel extends Entity<Double, String, String> {
+    private final Double volume;
     private final String storedMaterial;
     private final String materialMadeOf;
 
-
     private Barrel(BarrelBuilder builder) {
+		super(builder.volume, builder.storedMaterial, builder.materialMadeOf);
         this.volume = builder.volume;
         this.storedMaterial = builder.storedMaterial;
         this.materialMadeOf = builder.materialMadeOf;
@@ -24,7 +24,6 @@ public class Barrel implements Comparable<Barrel> {
         return materialMadeOf;
     }
 
-    @Override
     public int compareTo(Barrel o) {
         int volumeComparison = Double.compare(this.volume, o.volume);
         if (volumeComparison != 0) {
@@ -38,7 +37,6 @@ public class Barrel implements Comparable<Barrel> {
 
         return this.materialMadeOf.compareTo(o.materialMadeOf);
     }
-
 
     public static class BarrelBuilder {
         private double volume;
