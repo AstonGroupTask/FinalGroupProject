@@ -21,7 +21,6 @@ public class ManualDataEntryStrategy implements DataEntryStrategy {
 		}
 	}
 
-	// Метод для выбора типа сущности, если в массиве ещё нет элементов
 	private void selectEntityType(ScannerValidate scannerValidate, SingletoneArray array) {
 		int validVariant = 0;
 		while (true) {
@@ -33,23 +32,26 @@ public class ManualDataEntryStrategy implements DataEntryStrategy {
 
 			System.out.print("Please, enter your chosen action: ");
 			validVariant = (int) scannerValidate.getValidValue(TypeValidation.VARIANTS_4);
-
+			
 			if (validVariant == 4) {
 				System.out.println("Returning to data input menu.");
 				break;
 			}
-
-			switch (validVariant) {
-			case 1:
+			
+			if (validVariant == 1) {
 				createAnimalEntry(scannerValidate, array);
 				break;
-			case 2:
+			}
+			else if (validVariant == 2) {
 				createBarrelEntry(scannerValidate, array);
 				break;
-			case 3:
+			}
+			else if (validVariant == 3) {
 				createHumanEntry(scannerValidate, array);
 				break;
-			default:
+			} 
+			else if (validVariant == 4) {
+				System.out.println("Returning to data input menu.");
 				break;
 			}
 		}

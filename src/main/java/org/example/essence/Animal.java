@@ -13,6 +13,7 @@ public class Animal implements Comparable<Animal> {
 
     @Override
     public int compareTo(Animal o) {
+    	
         int speciesComparison = this.species.compareTo(o.species);
         if (speciesComparison != 0) {
             return speciesComparison;

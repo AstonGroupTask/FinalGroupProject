@@ -11,17 +11,17 @@ public class FileDataEntryStrategy implements DataEntryStrategy {
 		System.out.print("Please, enter your file path: ");
 		String filePath = (String) scannerValidate.getValidValue(TypeValidation.STRING_FILE_PATH);
 
-		FillFromFile<Object> fillStrategy = new FillFromFile<>();
-		Object[] result = fillStrategy.fillFromFile(0, filePath);
+		FillFromFile fillStrategy = new FillFromFile(filePath);
+        Comparable<?>[] result = fillStrategy.fill();
 
 		if (result == null) {
 			System.out.print("File reading error");
 			return;
 		}
 
-		for (Object entity : (Object[]) result[0]) {
+		for (Comparable<?> entity : result) {
 			array.add(entity);
 		}
-		System.out.print("File reading complete");
+		System.out.println("File reading complete");
 	}
 }
