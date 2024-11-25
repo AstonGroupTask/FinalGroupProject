@@ -1,18 +1,33 @@
 package org.example.essence;
 
-public class Human implements Comparable<Human> {
+public class Human extends Entity<String, Integer, String> {
 
     private final String gender;
-    private final int age;
+    private final Integer age;
     private final String surname;
 
     private Human(HumanBuilder builder) {
+		super(builder.gender, builder.age, builder.surname);
         this.gender = builder.gender;
         this.age = builder.age;
         this.surname = builder.surname;
     }
 
-    @Override
+	@Override
+	public String getFirstParam() {
+		return gender;
+	}
+
+	@Override
+	public Integer getSecondParam() {
+		return age;
+	}
+
+	@Override
+	public String getThirdParam() {
+		return surname;
+	}
+
     public int compareTo(Human o) {
         int surnameComparison = this.surname.compareTo(o.surname);
         if (surnameComparison != 0) {
@@ -50,5 +65,9 @@ public class Human implements Comparable<Human> {
             return new Human(this);
         }
     }
-}
 
+	@Override
+	public String toString() {
+		return gender + age + surname;
+	}
+}
