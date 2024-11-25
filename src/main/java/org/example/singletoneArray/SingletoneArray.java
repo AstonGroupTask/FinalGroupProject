@@ -1,9 +1,8 @@
 package org.example.singletoneArray;
 
-import org.example.essence.Animal;
-import org.example.essence.Barrel;
-import org.example.essence.Human;
-import org.example.sorting.stategies.TimSort;
+import java.util.Arrays;
+
+import org.example.menu.dataSort.SortingStrategy;
 
 public final class SingletoneArray {
 
@@ -12,7 +11,6 @@ public final class SingletoneArray {
 	private Object[] elements;
 	private int size;
 	private static final int DEFAULT_CAPACITY = 10;
-
 	private Class<?> storedType;
 
 	private SingletoneArray() {
@@ -82,31 +80,11 @@ public final class SingletoneArray {
 		return storedType.getName();
 	}
 
-	public void sort() {
-		if (size > 0) {
-			Object firstEntity = elements[0];
-
-			if (firstEntity instanceof Animal) {
-				Animal[] animalArray = new Animal[size];
-				System.arraycopy(elements, 0, animalArray, 0, size);
-				TimSort<Animal> timSort = new TimSort<>();
-				timSort.sort(animalArray);
-				System.arraycopy(animalArray, 0, elements, 0, size);
-
-			} else if (firstEntity instanceof Barrel) {
-				Barrel[] barrelArray = new Barrel[size];
-				System.arraycopy(elements, 0, barrelArray, 0, size);
-				TimSort<Barrel> timSort = new TimSort<>();
-				timSort.sort(barrelArray);
-				System.arraycopy(barrelArray, 0, elements, 0, size);
-
-			} else if (firstEntity instanceof Human) {
-				Human[] humanArray = new Human[size];
-				System.arraycopy(elements, 0, humanArray, 0, size);
-				TimSort<Human> timSort = new TimSort<>();
-				timSort.sort(humanArray);
-				System.arraycopy(humanArray, 0, elements, 0, size);
-			}
+	public void sort(SortingStrategy<?> strategy) {
+		if (storedType != null && Comparable.class.isAssignableFrom(storedType)) {
+			strategy.sort(elements);
+		} else {
+			throw new IllegalStateException("Elements are not Comparable or no type is set.");
 		}
 	}
 }

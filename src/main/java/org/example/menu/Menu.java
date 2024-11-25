@@ -1,5 +1,7 @@
 package org.example.menu;
 
+import org.example.menu.dataEntry.EnterData;
+import org.example.menu.dataSort.SortData;
 import org.example.singletoneArray.SingletoneArray;
 import org.example.util.validate.ScannerValidate;
 import org.example.util.validate.TypeValidation;
@@ -48,7 +50,7 @@ public final class Menu {
 				enterData.menu();
 				break;
 			case (2):
-				sortData.sort();
+				sortData.menu();
 				break;
 			case (3):
 				searchData.menu();
