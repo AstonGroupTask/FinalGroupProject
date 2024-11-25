@@ -1,15 +1,15 @@
 package org.example.util.search;
 
+import java.lang.reflect.Field;
 import java.util.Arrays;
 import java.util.Comparator;
 
 import org.example.essence.Animal;
-import org.example.util.search.comparators.animal.*;
 
 /**
  * <p>Поиск с использованием generics</p>
  */
-public final class BinarySearchGeneric <E extends Comparable<E>, C extends Comparator<E>> {
+public final class BinarySearchGeneric <E extends Comparable<E>, T extends Comparable<T>> {
 	
 	/**
 	 * <p>Ищет точное совпадение</p>
@@ -20,20 +20,42 @@ public final class BinarySearchGeneric <E extends Comparable<E>, C extends Compa
 	 * @param searchTarget поисковый запрос
 	 * @param c компаратор, через него указывается, какой параметр искать
 	 * @return индекс, по которому найден объект либо -1
+	 * @throws NoSuchFieldException
+	 * @throws SecurityException
+	 * @throws IllegalArgumentException
+	 * @throws IllegalAccessException 
 	 */
-
-	public static <E> int binarySearch(E[] collection, E searchTarget, Comparator<? super E> c) {
+	public static <E, T> int binarySearch(E[] collection, String fieldToSearch, T searchParam) {
 		int leftSearchBound = 0;
-		int rightSearchBound = collection.length - 1;  
+		int rightSearchBound = collection.length - 1;
 
 		while (leftSearchBound <= rightSearchBound) {
-			int middleIndex = (int)Math.floor((leftSearchBound + rightSearchBound) / 2);
+			int middleIndex = (leftSearchBound + rightSearchBound) / 2;
 			E middleValue = collection[middleIndex];
-			int comparison = c.compare(searchTarget, middleValue);
+			int comparison = 0;
 
-			if (comparison > 0) {
+			try {
+				Field field = middleValue.getClass().getDeclaredField(fieldToSearch);
+				field.setAccessible(true);
+				comparison = ((Comparable<T>)field.get(middleValue)).compareTo(searchParam);
+			} catch (NoSuchFieldException e) {
+				System.out.println("Ошибка! У класса отсутствует поле " + fieldToSearch + " .");
+				e.printStackTrace();
+			} catch (SecurityException e) {
+				System.out.println("Ошибка! Ошибка доступа к полю " + fieldToSearch + " .");
+				e.printStackTrace();
+			} catch (IllegalArgumentException e) {
+				System.out.println("Ошибка! Объект " + middleValue.toString()
+					+ " не является экземпляром класса " + middleValue.getClass().toString() + " .");
+				e.printStackTrace();
+			} catch (IllegalAccessException e) {
+				System.out.println("Ошибка! Поле в классе " + middleValue.getClass().toString() + " недоступно.");
+				e.printStackTrace();
+			}
+
+			if (comparison < 0) {
 				leftSearchBound = middleIndex + 1;
-			} else if (comparison < 0) {
+			} else if (comparison > 0) {
 				rightSearchBound = middleIndex - 1;
 			} else {
 				return middleIndex;
@@ -52,10 +74,6 @@ public final class BinarySearchGeneric <E extends Comparable<E>, C extends Compa
 			new Animal.AnimalBuilder().species("ЛЕВ").eyeColor("ЗЕЛЁНЫЙ").hasFur(true).build(),
 			new Animal.AnimalBuilder().species("ШИМПАНЗЕ").eyeColor("СИНИЙ").hasFur(true).build()
 		};
-		
-		Animal animalToSearch = new Animal.AnimalBuilder().species("ЖИРАФ").eyeColor("СИНИЙ").hasFur(true).build();
-
-		EyeColorComparator<Animal> comp = new EyeColorComparator<Animal>();
 
 		System.out.println("Unsorted animals");
 
@@ -63,7 +81,7 @@ public final class BinarySearchGeneric <E extends Comparable<E>, C extends Compa
 			System.out.println(animals[i].toString());
 		}
 
-		Arrays.sort(animals, comp);
+		Arrays.sort(animals, Comparator.comparing(Animal::getSpecies));
 
 		System.out.println("Sorted animals");
 
@@ -71,7 +89,7 @@ public final class BinarySearchGeneric <E extends Comparable<E>, C extends Compa
 			System.out.println(animals[i].toString());
 		}
 
-		int indexFound = BinarySearchGeneric.binarySearch(animals, animalToSearch, comp);
+		int indexFound = BinarySearchGeneric.binarySearch(animals, "species", "ЛЕВ");
 		System.out.println("Найдено в индексе: " + indexFound);
 	}
 }
