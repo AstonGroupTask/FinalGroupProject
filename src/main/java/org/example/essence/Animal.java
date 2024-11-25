@@ -26,6 +26,17 @@ public class Animal implements Comparable<Animal> {
         return Boolean.compare(this.hasFur, o.hasFur);
     }
 
+    public String getSpecies() {
+        return species;
+    }
+
+    public String getEyeColor() {
+        return eyeColor;
+    }
+
+    public boolean isHasFur() {
+        return hasFur;
+    }
 
     public static class AnimalBuilder {
         private String species;
