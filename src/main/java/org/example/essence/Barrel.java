@@ -12,20 +12,17 @@ public class Barrel extends Entity<Double, String, String> {
         this.materialMadeOf = builder.materialMadeOf;
     }
 
-	@Override
-	public Double getFirstParam() {
-		return volume;
-	}
+    public double getVolume() {
+        return volume;
+    }
 
-	@Override
-	public String getSecondParam() {
-		return storedMaterial;
-	}
+    public String getStoredMaterial() {
+        return storedMaterial;
+    }
 
-	@Override
-	public String getThirdParam() {
-		return materialMadeOf;
-	}
+    public String getMaterialMadeOf() {
+        return materialMadeOf;
+    }
 
     public int compareTo(Barrel o) {
         int volumeComparison = Double.compare(this.volume, o.volume);
@@ -68,6 +65,6 @@ public class Barrel extends Entity<Double, String, String> {
 
     @Override
     public String toString() {
-        return volume + storedMaterial + materialMadeOf;
+        return volume + " " + storedMaterial + " " + materialMadeOf;
     }
 }

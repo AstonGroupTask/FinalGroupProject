@@ -1,0 +1,13 @@
+<<<<<<< HEAD
+type,species,eyeColor,hasFur
+Animal,Tiger,Yellow,true
+Animal,Lion,Brown,true
+=======
+type,species,eyeColor,hasFur,volume,storedMaterial,materialMadeOf,gender,age,surname
+Animal,Tiger,Yellow,true
+Animal,Lion,Brown,true
+Barrel,50.5,Oil,Steel
+Barrel,100,Water,Steel
+Human,Male,30,Smith
+Human,Female,25,Jones
+>>>>>>> main

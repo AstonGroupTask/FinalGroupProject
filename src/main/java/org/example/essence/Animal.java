@@ -28,6 +28,7 @@ public class Animal extends Entity<String, String, Boolean> {
 	}
 
     public int compareTo(Animal o) {
+    	
         int speciesComparison = this.species.compareTo(o.species);
         if (speciesComparison != 0) {
             return speciesComparison;
@@ -39,6 +40,18 @@ public class Animal extends Entity<String, String, Boolean> {
         }
 
         return Boolean.compare(this.hasFur, o.hasFur);
+    }
+
+    public String getSpecies() {
+        return species;
+    }
+
+    public String getEyeColor() {
+        return eyeColor;
+    }
+
+    public boolean isHasFur() {
+        return hasFur;
     }
 
     public static class AnimalBuilder {
@@ -68,6 +81,6 @@ public class Animal extends Entity<String, String, Boolean> {
 
     @Override
     public String toString() {
-        return species + eyeColor + hasFur;
+        return species + " " + eyeColor +  " " + hasFur;
     }
 }

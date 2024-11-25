@@ -28,6 +28,18 @@ public class Human extends Entity<String, Integer, String> {
 		return surname;
 	}
 
+    public String getGender() {
+        return gender;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public String getSurname() {
+        return surname;
+    }
+
     public int compareTo(Human o) {
         int surnameComparison = this.surname.compareTo(o.surname);
         if (surnameComparison != 0) {
@@ -66,8 +78,8 @@ public class Human extends Entity<String, Integer, String> {
         }
     }
 
-	@Override
-	public String toString() {
-		return gender + age + surname;
-	}
+    @Override
+    public String toString() {
+        return  gender + " "  + age + " " + surname;
+    }
 }
