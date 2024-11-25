@@ -4,6 +4,8 @@ import org.example.essence.Animal;
 import org.example.essence.Barrel;
 import org.example.essence.Human;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.security.SecureRandom;
 import java.text.DecimalFormat;
 import java.util.*;
@@ -107,8 +109,11 @@ public class RandomEntityGenerator {
                 .get(random.nextInt(storedProductByBarrelMaterial.size()));
         List<String> storedProductList = storedProductByBarrelMaterial.get(randomBarrelMaterial);
         String randomStoredProduct = storedProductList.get(random.nextInt(storedProductList.size()));
-        DecimalFormat df = new DecimalFormat("#.##");
-        double randomVolume = Double.parseDouble(df.format(Math.random() * 1000.1));
+        
+        double randomVolume = Math.random() * 1000.1;
+        randomVolume = new BigDecimal(randomVolume)
+                        .setScale(2, RoundingMode.HALF_UP)
+                        .doubleValue();
 
         return new Barrel.BarrelBuilder()
                 .volume(randomVolume)
