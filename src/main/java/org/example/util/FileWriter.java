@@ -23,21 +23,24 @@ public class FileWriter {
         if (!Files.exists(pathToFile)) {
             try {
                 Files.createFile(path);
-                String headerTable = heading;
-                Files.writeString(path, headerTable, StandardOpenOption.APPEND);
+                Files.writeString(path, heading + "\n", StandardOpenOption.APPEND);
             } catch (IOException e) {
-                throw new IllegalArgumentException("Ошибка чтения пути к файлу");
+                throw new IllegalArgumentException("Ошибка создания файла: " + pathToFile, e);
             }
         }
     }
 
-
-    public void appendNewLine(String currentPriceWithData) {
+    public void appendNewLine(String string) {
         try {
-            Files.writeString(path, currentPriceWithData + "\n", StandardOpenOption.APPEND);
+            Files.writeString(path, string + "\n", StandardOpenOption.APPEND);
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new IllegalArgumentException("Ошибка записи в файл", e);
+        }
+    }
+
+    public <T> void writeArrayToFile(T[] array) {
+        for (T element : array) {
+            appendNewLine(element.toString());
         }
     }
 }
-
