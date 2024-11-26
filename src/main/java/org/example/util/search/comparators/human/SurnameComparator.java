@@ -7,6 +7,6 @@ import org.example.essence.Human;
 public class SurnameComparator<H extends Human> implements Comparator<H> {
 	
 	public int compare(H h1, H h2) {
-		return h1.getThirdParam().compareTo(h2.getThirdParam());
+		return h1.getSurname().compareTo(h2.getSurname());
 	}
 }

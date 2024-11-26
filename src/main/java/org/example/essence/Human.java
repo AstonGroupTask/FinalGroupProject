@@ -13,6 +13,21 @@ public class Human extends Entity<String, Integer, String> {
         this.surname = builder.surname;
     }
 
+	@Override
+	public String getFirstParam() {
+		return gender;
+	}
+
+	@Override
+	public Integer getSecondParam() {
+		return age;
+	}
+
+	@Override
+	public String getThirdParam() {
+		return surname;
+	}
+
     public String getGender() {
         return gender;
     }

@@ -7,6 +7,6 @@ import org.example.essence.Barrel;
 public class StoredMaterialComparator<B extends Barrel> implements Comparator<B> {
 	
 	public int compare(B b1, B b2) {
-		return b1.getSecondParam().compareTo(b2.getSecondParam());
+		return b1.getStoredMaterial().compareTo(b2.getStoredMaterial());
 	}
 }
