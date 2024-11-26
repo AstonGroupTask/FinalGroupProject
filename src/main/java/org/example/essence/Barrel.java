@@ -67,4 +67,8 @@ public class Barrel extends Entity<Double, String, String> {
 	public String toString() {
 		return "Volume:" + volume + "; Stored:" + storedMaterial + ";  Material:" + materialMadeOf + ";";
 	}
+	
+	public String toWrite() {
+		return "Barrel," + volume + "," + storedMaterial + "," + materialMadeOf;
+	}
 }

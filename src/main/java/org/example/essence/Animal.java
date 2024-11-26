@@ -83,4 +83,8 @@ public class Animal extends Entity<String, String, Boolean> {
 	public String toString() {
 		return "Species:" + species + "; Eye Color:" + eyeColor + "; Fur:" + hasFur + ";";
 	}
+	
+	public String toWrite() {
+		return "Animal," + species + "," + eyeColor + "," + hasFur;
+	}
 }
