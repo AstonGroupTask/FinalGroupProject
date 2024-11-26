@@ -8,16 +8,23 @@ import org.example.util.validate.TypeValidation;
 
 public final class SortData extends BaseVariant {
 
-	private final SingletoneArray array = SingletoneArray.getInstance();
-	private final ScannerValidate scannerValidate = new ScannerValidate();
-
 	@Override
 	public void menu() {
-		System.out.println("Data input mode selected");
+		System.out.println("Data sort mode selected");
 
+		if (array.isEmpty()) {
+			System.out.println("No entities found \nReturn to main menu");
+			return;
+		}
+		
 		int validVariant = 0;
 
 		while (true) {
+			System.out.println("Stored entities:");
+			System.out.println("=====================================");
+			array.printStored();
+			System.out.println("=====================================");
+
 			System.out.println("Please, select type of sort:");
 			System.out.println(" 1 - TimSort");
 			System.out.println(" 2 - Custom Sort");
@@ -35,7 +42,7 @@ public final class SortData extends BaseVariant {
 				sort(customSortMenu());
 				break;
 			case 3:
-				// sort(new QuickSort());
+				sort(new QuickSort());
 				break;
 			default:
 				break;
@@ -59,7 +66,7 @@ public final class SortData extends BaseVariant {
 
 	public String printFields(Class<?> clazz) {
 		Field[] fields = clazz.getDeclaredFields();
-		System.out.println("Please, select field to sort");
+		System.out.println("Please, select field: ");
 
 		int selected_type = 0;
 
