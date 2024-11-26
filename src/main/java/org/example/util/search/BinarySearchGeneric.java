@@ -13,13 +13,11 @@ public final class BinarySearchGeneric <E extends Comparable<E>, T extends Compa
 	
 	/**
 	 * <p>Ищет точное совпадение</p>
-	 * <p>Требует уже отсортированную коллекцию</p>
-	 * <p>Сортировку проводить с тем же компаратором, что и поиск</p>
-	 * @param collection коллекция
-	 * @param collectionSize количество элементов
-	 * @param searchTarget поисковый запрос
-	 * @param c компаратор, через него указывается, какой параметр искать
-	 * @return индекс, по которому найден объект либо -1
+	 * <p>Требует уже отсортированный массив</p>
+	 * @param collection массив
+	 * @param fieldToSearch название параметра, по которому искать
+	 * @param searchParam поисковый запрос
+	 * @return индекс в массиве, по которому найден объект либо -1, если объект не найден
 	 * @throws NoSuchFieldException
 	 * @throws SecurityException
 	 * @throws IllegalArgumentException
