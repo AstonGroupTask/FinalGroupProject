@@ -10,4 +10,10 @@ public abstract class BaseVariant {
     protected SingletoneArray array = SingletoneArray.getInstance();
     
     public abstract void menu();
+    
+    public void printData() {
+		for (int i = 0; i < array.size(); i++) {
+			System.out.println(array.get(i));
+		}
+	}
 }
