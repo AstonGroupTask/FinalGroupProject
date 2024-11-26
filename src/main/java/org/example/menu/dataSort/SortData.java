@@ -1,5 +1,6 @@
 package org.example.menu.dataSort;
 
+import java.lang.reflect.Field;
 import org.example.menu.BaseVariant;
 import org.example.singletoneArray.SingletoneArray;
 import org.example.util.validate.ScannerValidate;
@@ -19,7 +20,7 @@ public final class SortData extends BaseVariant {
 		while (true) {
 			System.out.println("Please, select type of sort:");
 			System.out.println(" 1 - TimSort");
-			System.out.println(" 2 - Bubble Sort");
+			System.out.println(" 2 - Custom Sort");
 			System.out.println(" 3 - Quick Sort");
 			System.out.println(" 4 - Exit");
 
@@ -31,7 +32,7 @@ public final class SortData extends BaseVariant {
 				sort(new TimSort());
 				break;
 			case 2:
-				// sort(new BubbleSort());
+				sort(customSortMenu());
 				break;
 			case 3:
 				// sort(new QuickSort());
@@ -45,6 +46,37 @@ public final class SortData extends BaseVariant {
 				break;
 			}
 		}
+	}
+
+	public CustomSort customSortMenu() {
+		CustomSort customSort = new CustomSort();
+
+		String sortByField = printFields(array.get(0).getClass());
+
+		customSort.setSortBy(sortByField);
+		return customSort;
+	}
+
+	public String printFields(Class<?> clazz) {
+		Field[] fields = clazz.getDeclaredFields();
+		System.out.println("Please, select field to sort");
+
+		int selected_type = 0;
+
+		for (int i = 0; i < fields.length; i++) {
+			Field field = fields[i];
+			System.out.println(" " + (i + 1) + ". " + field.getName());
+		}
+
+		while (true) {
+			System.out.print("Please, enter your chosen action: ");
+			selected_type = (int) scannerValidate.getValidValue(TypeValidation.INT);
+			if (selected_type <= fields.length)
+				break;
+			System.out.print("Invalid value");
+		}
+
+		return fields[selected_type - 1].getName();
 	}
 
 	public void sort(SortingStrategy<?> strategy) {
