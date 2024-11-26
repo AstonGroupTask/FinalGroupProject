@@ -1,6 +1,7 @@
 package org.example.menu;
 
 import org.example.menu.dataEntry.EnterData;
+import org.example.menu.dataSearch.SearchData;
 import org.example.menu.dataSort.SortData;
 import org.example.singletoneArray.SingletoneArray;
 import org.example.util.validate.ScannerValidate;
@@ -9,7 +10,8 @@ import org.example.util.validate.TypeValidation;
 public final class Menu {
 
 	ScannerValidate scannerValidate = new ScannerValidate();
-
+	SingletoneArray array = SingletoneArray.getInstance();
+	
 	private static void clearConsole() {
 		try {
 			String os = System.getProperty("os.name").toLowerCase();
@@ -32,10 +34,13 @@ public final class Menu {
 		SortData sortData = new SortData();
 		SearchData searchData = new SearchData();
 		
-		SingletoneArray array = SingletoneArray.getInstance();
-		
 		while (true) {
 			// clearConsole(); TODO doesn't work in eclipse
+			System.out.println("Stored entities:");
+			System.out.println("=====================================");
+			array.printStored();
+			System.out.println("=====================================");
+			
 			System.out.println("Please, select one of three variants:");
 			System.out.println(" 1 - Enter");
 			System.out.println(" 2 - Sort");
@@ -44,7 +49,7 @@ public final class Menu {
 
 			System.out.print("Please, enter your chosen action: ");
 			validVariant = (int) scannerValidate.getValidValue(TypeValidation.VARIANTS_4);
-
+			
 			switch (validVariant) {
 			case (1):
 				enterData.menu();
@@ -68,12 +73,5 @@ public final class Menu {
 	public static void main(String[] args) {
 		Menu menu = new Menu();
 		menu.execute();
-		
-		SingletoneArray array = SingletoneArray.getInstance();
-		
-		for (int i = 0; i < array.size(); i ++)
-		{
-			System.out.println(array.get(i).toString());
-		}
 	}
 }
