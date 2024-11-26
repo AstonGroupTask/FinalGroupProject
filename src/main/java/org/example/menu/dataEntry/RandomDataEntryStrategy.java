@@ -14,9 +14,9 @@ public class RandomDataEntryStrategy implements DataEntryStrategy {
 		System.out.println("Random data entry mode");
 
 		if (!array.isEmpty()) {
-			Object firstEntity = array.get(0);
-			System.out.println("The type of existing entity is: " + firstEntity.getClass().getSimpleName());
-			addRandomEntitiesOfSameType(array, firstEntity);
+			System.out.println("The type of existing entity is: " + array.getStoredTypeSimple());
+			
+			addRandomEntitiesOfSameType(array, array.get(0));
 		} else {
 			int validVariant = 0;
 			int numberOfEntities = 0;
@@ -64,18 +64,23 @@ public class RandomDataEntryStrategy implements DataEntryStrategy {
 
 		System.out.print("Please, enter the number of entities to add: ");
 		numberOfEntities = (int) scannerValidate.getValidValue(TypeValidation.INT);
-
+		
+		System.out.println("Start Addition");
+		
 		if (firstEntity instanceof Animal) {
 			for (int i = 0; i < numberOfEntities; i++) {
 				array.add(RandomEntityGenerator.randomAnimalGenerate());
+				System.out.println("Add " + array.get(i).toString());
 			}
 		} else if (firstEntity instanceof Barrel) {
 			for (int i = 0; i < numberOfEntities; i++) {
 				array.add(RandomEntityGenerator.randomBarrelGenerate());
+				System.out.println("Add " + array.get(i).toString());
 			}
 		} else if (firstEntity instanceof Human) {
 			for (int i = 0; i < numberOfEntities; i++) {
 				array.add(RandomEntityGenerator.randomHumanGenerate());
+				System.out.println("Add " + array.get(i).toString());
 			}
 		}
 		System.out.println("Addition complete");
