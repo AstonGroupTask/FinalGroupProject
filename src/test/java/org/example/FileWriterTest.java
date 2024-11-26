@@ -12,35 +12,40 @@ import java.nio.file.Paths;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class FileWriterTest {
-    private FileWriter fileWriter;
+
     private final String testFilePath = "testFile.txt";
 
 
     @BeforeEach
-    public void setUp() {
-        fileWriter = new FileWriter(testFilePath);
+    public void setUp() throws IOException {
+        Path path = Paths.get(testFilePath);
+        if (Files.exists(path)) {
+            Files.delete(path);
+        }
     }
 
     @Test
     public void testFileCreation() {
+        FileWriter.appendNewLine(testFilePath, "Test line");
         assertTrue(Files.exists(Paths.get(testFilePath)));
     }
 
     @Test
     public void testCreateFileWhichNotExist() {
-        String path = "C:\\Users\\citru\\IdeaProjects\\AstonGroupProject\\src\\main\\java\\org\\example\\util\\TestFile";
+        String path = "C:\\Users\\citru\\IdeaProjects\\AstonGroupProject\\src\\main\\java\\org\\example\\util\\TestFile.txt";
         Path pathToFile = Path.of(path);
+
         if (Files.exists(pathToFile)) {
             try {
                 Files.delete(pathToFile);
-                System.out.println("Файл уже был создан со страрыми значениями - удален");
+                System.out.println("Файл уже был создан со старыми значениями — удалён");
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
         }
-        FileWriter fileWriter2 = new FileWriter(path);
+
+        FileWriter.appendNewLine(path, "Тест файла");
         assertTrue(Files.exists(pathToFile));
         System.out.println("Файл создан");
     }
-
 }

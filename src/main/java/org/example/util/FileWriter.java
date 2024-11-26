@@ -5,38 +5,38 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardOpenOption;
 
-public class FileWriter {
+public final class FileWriter {
 
+    private FileWriter() {
 
-    private Path path;
-
-    public FileWriter(String pathToFile) {
-        this(Path.of(pathToFile), "");
     }
 
-    public FileWriter(Path pathToFile, String heading) {
-        this.path = pathToFile;
-        createFileIfNotExist(pathToFile, heading);
-    }
-
-    private void createFileIfNotExist(Path pathToFile, String heading) {
+    private static void createFileIfNotExist(Path pathToFile, String heading) {
         if (!Files.exists(pathToFile)) {
             try {
-                Files.createFile(path);
-                String headerTable = heading;
-                Files.writeString(path, headerTable, StandardOpenOption.APPEND);
+                Files.createFile(pathToFile);
+                Files.writeString(pathToFile, heading + "\n", StandardOpenOption.APPEND);
             } catch (IOException e) {
-                throw new IllegalArgumentException("Ошибка чтения пути к файлу");
+                throw new IllegalArgumentException("Ошибка создания файла: " + pathToFile, e);
             }
         }
     }
 
-
-    public void appendNewLine(String currentPriceWithData) {
+    public static void appendNewLine(String pathToFile, String string) {
+        Path path = Path.of(pathToFile);
+        createFileIfNotExist(path, "");
         try {
-            Files.writeString(path, currentPriceWithData + "\n", StandardOpenOption.APPEND);
+            Files.writeString(path, string + "\n", StandardOpenOption.APPEND);
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new IllegalArgumentException("Ошибка записи в файл: " + pathToFile, e);
+        }
+    }
+
+    public static <T> void writeArrayToFile(String pathToFile, T[] array) {
+        Path path = Path.of(pathToFile);
+        createFileIfNotExist(path, "");
+        for (T element : array) {
+            appendNewLine(pathToFile, element.toString());
         }
     }
 }
