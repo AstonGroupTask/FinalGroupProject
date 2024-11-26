@@ -1,16 +1,16 @@
 package org.example.essence;
 
 public class Animal extends Entity<String, String, Boolean> {
-    private final String species;
-    private final String eyeColor;
-    private final Boolean hasFur;
+	private final String species;
+	private final String eyeColor;
+	private final Boolean hasFur;
 
-    private Animal(AnimalBuilder builder) {
+	private Animal(AnimalBuilder builder) {
 		super(builder.species, builder.eyeColor, builder.hasFur);
-        this.species = builder.species;
-        this.eyeColor = builder.eyeColor;
-        this.hasFur = builder.hasFur;
-    }
+		this.species = builder.species;
+		this.eyeColor = builder.eyeColor;
+		this.hasFur = builder.hasFur;
+	}
 
 	@Override
 	public String getFirstParam() {
@@ -27,60 +27,60 @@ public class Animal extends Entity<String, String, Boolean> {
 		return hasFur;
 	}
 
-    public int compareTo(Animal o) {
-    	
-        int speciesComparison = this.species.compareTo(o.species);
-        if (speciesComparison != 0) {
-            return speciesComparison;
-        }
+	public int compareTo(Animal o) {
 
-        int eyeColorComparison = this.eyeColor.compareTo(o.eyeColor);
-        if (eyeColorComparison != 0) {
-            return eyeColorComparison;
-        }
+		int speciesComparison = this.species.compareTo(o.species);
+		if (speciesComparison != 0) {
+			return speciesComparison;
+		}
 
-        return Boolean.compare(this.hasFur, o.hasFur);
-    }
+		int eyeColorComparison = this.eyeColor.compareTo(o.eyeColor);
+		if (eyeColorComparison != 0) {
+			return eyeColorComparison;
+		}
 
-    public String getSpecies() {
-        return species;
-    }
+		return Boolean.compare(this.hasFur, o.hasFur);
+	}
 
-    public String getEyeColor() {
-        return eyeColor;
-    }
+	public String getSpecies() {
+		return species;
+	}
 
-    public boolean isHasFur() {
-        return hasFur;
-    }
+	public String getEyeColor() {
+		return eyeColor;
+	}
 
-    public static class AnimalBuilder {
-        private String species;
-        private String eyeColor;
-        private boolean hasFur;
+	public boolean isHasFur() {
+		return hasFur;
+	}
 
-        public AnimalBuilder species(String species) {
-            this.species = species;
-            return this;
-        }
+	public static class AnimalBuilder {
+		private String species;
+		private String eyeColor;
+		private boolean hasFur;
 
-        public AnimalBuilder eyeColor(String eyeColor) {
-            this.eyeColor = eyeColor;
-            return this;
-        }
+		public AnimalBuilder species(String species) {
+			this.species = species;
+			return this;
+		}
 
-        public AnimalBuilder hasFur(boolean hasFur) {
-            this.hasFur = hasFur;
-            return this;
-        }
+		public AnimalBuilder eyeColor(String eyeColor) {
+			this.eyeColor = eyeColor;
+			return this;
+		}
 
-        public Animal build() {
-            return new Animal(this);
-        }
-    }
+		public AnimalBuilder hasFur(boolean hasFur) {
+			this.hasFur = hasFur;
+			return this;
+		}
 
-    @Override
-    public String toString() {
-        return species + " " + eyeColor +  " " + hasFur;
-    }
+		public Animal build() {
+			return new Animal(this);
+		}
+	}
+
+	@Override
+	public String toString() {
+		return "Species:" + species + "; Eye Color:" + eyeColor + "; Fur:" + hasFur + ";";
+	}
 }
