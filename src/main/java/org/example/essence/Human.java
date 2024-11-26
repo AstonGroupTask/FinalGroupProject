@@ -82,4 +82,8 @@ public class Human extends Entity<String, Integer, String> {
 	public String toString() {
 		return "Gender:" + gender + "; Age:" + age + "; Surname:" + surname + ";";
 	}
+	
+	public String toWrite() {
+		return "Human," + gender + "," + age + "," + surname;
+	}
 }

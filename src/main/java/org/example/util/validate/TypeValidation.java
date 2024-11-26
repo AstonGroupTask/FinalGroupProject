@@ -8,7 +8,8 @@ public enum TypeValidation {
 	STRING_FILE_PATH(String.class, 1, 99, true,
 			"^([A-Za-z]:\\\\|/)?([A-Za-z0-9_\\-\\/\\\\.]+(?:[\\/\\\\][A-Za-z0-9_\\-\\.]+)*)$"),
 	STRING_EMPTY(String.class, 1, 99, true, "^[A-Za-z0-9]*$"), VARIANTS_3(Integer.class, 1, 3, false, null),
-	VARIANTS_4(Integer.class, 1, 4, false, null);
+	VARIANTS_4(Integer.class, 1, 4, false, null),
+	VARIANTS_5(Integer.class, 1, 5, false, null);
 
 	private final Class<?> type;
 	private final Object min;

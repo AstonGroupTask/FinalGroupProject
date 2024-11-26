@@ -1,5 +1,6 @@
 package org.example.menu;
 
+import org.example.menu.FileWriterData.FileWriterData;
 import org.example.menu.dataEntry.EnterData;
 import org.example.menu.dataSearch.SearchData;
 import org.example.menu.dataSort.SortData;
@@ -33,6 +34,7 @@ public final class Menu {
 		EnterData enterData = new EnterData();
 		SortData sortData = new SortData();
 		SearchData searchData = new SearchData();
+		FileWriterData fileWriterData = new FileWriterData();
 		
 		while (true) {
 			// clearConsole(); TODO doesn't work in eclipse
@@ -45,10 +47,11 @@ public final class Menu {
 			System.out.println(" 1 - Enter");
 			System.out.println(" 2 - Sort");
 			System.out.println(" 3 - Search");
-			System.out.println(" 4 - Exit");
+			System.out.println(" 4 - Write");
+			System.out.println(" 5 - Exit");
 
 			System.out.print("Please, enter your chosen action: ");
-			validVariant = (int) scannerValidate.getValidValue(TypeValidation.VARIANTS_4);
+			validVariant = (int) scannerValidate.getValidValue(TypeValidation.VARIANTS_5);
 			
 			switch (validVariant) {
 			case (1):
@@ -60,10 +63,13 @@ public final class Menu {
 			case (3):
 				searchData.menu();
 				break;
+			case (4):
+				fileWriterData.menu();
+				break;
 			default:
 			}
 
-			if (validVariant == 4) {
+			if (validVariant == 5) {
 				System.out.println("Exiting...");
 				break;
 			}
