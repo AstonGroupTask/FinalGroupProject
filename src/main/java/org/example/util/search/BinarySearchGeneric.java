@@ -58,15 +58,15 @@ public final class BinarySearchGeneric <E extends Comparable<E>, T extends Compa
 			} else if (comparison > 0) {
 				rightSearchBound = middleIndex - 1;
 			} else {
+				System.out.println("Middle index: " + middleIndex);
 				return middleIndex;
 			}
 		}
-
-		System.out.println("Не найдено");
+		
 		return -1;
 	}
 
-	// Тест поиска
+	// Пример использования
 	public static void main(String[] args) {
 		Animal[] animals = {
 			new Animal.AnimalBuilder().species("СЛОН").eyeColor("КАРИЙ").hasFur(false).build(),
@@ -75,21 +75,18 @@ public final class BinarySearchGeneric <E extends Comparable<E>, T extends Compa
 			new Animal.AnimalBuilder().species("ШИМПАНЗЕ").eyeColor("СИНИЙ").hasFur(true).build()
 		};
 
-		System.out.println("Unsorted animals");
-
-		for (int i = 0; i < animals.length; i++) {
-			System.out.println(animals[i].toString());
-		}
-
+		// Отсортировать по параметру поиска
 		Arrays.sort(animals, Comparator.comparing(Animal::getSpecies));
 
-		System.out.println("Sorted animals");
+		// Получить индекс в массиве, по которому нашелся объект с параметром
+		int locatedAtIndex = BinarySearchGeneric.binarySearch(animals, "species", "ЛЕВ");
 
-		for (int i = 0; i < animals.length; i++) {
-			System.out.println(animals[i].toString());
+		// Вывести результат поиска
+		if (locatedAtIndex == -1) {
+			System.out.println("Запрос не найден");
+		} else {
+			System.out.println("Найдено");
+			System.out.println(animals[locatedAtIndex]);
 		}
-
-		int indexFound = BinarySearchGeneric.binarySearch(animals, "species", "ЛЕВ");
-		System.out.println("Найдено в индексе: " + indexFound);
 	}
 }
