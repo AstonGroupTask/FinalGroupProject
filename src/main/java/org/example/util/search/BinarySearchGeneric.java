@@ -58,11 +58,10 @@ public final class BinarySearchGeneric <E extends Comparable<E>, T extends Compa
 			} else if (comparison > 0) {
 				rightSearchBound = middleIndex - 1;
 			} else {
-				System.out.println("Middle index: " + middleIndex);
 				return middleIndex;
 			}
 		}
-		
+
 		return -1;
 	}
 
