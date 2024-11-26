@@ -15,8 +15,9 @@ public class ManualDataEntryStrategy implements DataEntryStrategy {
 		if (array.isEmpty()) {
 			selectEntityType(scannerValidate, array);
 		} else {
+			System.out.println("The type of existing entity is: " + array.getStoredTypeSimple());
+			
 			Object firstElement = array.get(0);
-			System.out.println("The type of existing entity is: " + firstElement.getClass().getSimpleName());
 			createEntityOfSameType(scannerValidate, array, firstElement);
 		}
 	}

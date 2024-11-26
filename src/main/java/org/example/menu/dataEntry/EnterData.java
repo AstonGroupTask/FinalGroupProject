@@ -14,6 +14,12 @@ public final class EnterData extends BaseVariant {
 		int validVariant = 0;
 
 		while (true) {
+			
+			System.out.println("Stored entities:");
+			System.out.println("=====================================");
+			array.printStored();
+			System.out.println("=====================================");
+			
 			System.out.println("Please, select type of input:");
 			System.out.println(" 1 - Manual data entry");
 			System.out.println(" 2 - Random data");
@@ -41,17 +47,10 @@ public final class EnterData extends BaseVariant {
 				System.out.println("Return to main menu");
 				break;
 			}
-
+			
 			if (dataEntryStrategy != null) {
 				dataEntryStrategy.execute(array, scannerValidate);
 			}
-			printData();
-		}
-	}
-
-	private void printData() {
-		for (int i = 0; i < array.size(); i++) {
-			System.out.println(array.get(i));
 		}
 	}
 }

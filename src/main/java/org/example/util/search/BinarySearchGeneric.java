@@ -7,21 +7,29 @@ import java.util.Comparator;
 import org.example.essence.Animal;
 
 /**
- * <p>Поиск с использованием generics</p>
+ * <p>
+ * Поиск с использованием generics
+ * </p>
  */
-public final class BinarySearchGeneric <E extends Comparable<E>, T extends Comparable<T>> {
-	
+public final class BinarySearchGeneric<E extends Comparable<E>, T extends Comparable<T>> {
+
 	/**
-	 * <p>Ищет точное совпадение</p>
-	 * <p>Требует уже отсортированный массив</p>
-	 * @param collection массив
+	 * <p>
+	 * Ищет точное совпадение
+	 * </p>
+	 * <p>
+	 * Требует уже отсортированный массив
+	 * </p>
+	 * 
+	 * @param collection    массив
 	 * @param fieldToSearch название параметра, по которому искать
-	 * @param searchParam поисковый запрос
-	 * @return индекс в массиве, по которому найден объект либо -1, если объект не найден
+	 * @param searchParam   поисковый запрос
+	 * @return индекс в массиве, по которому найден объект либо -1, если объект не
+	 *         найден
 	 * @throws NoSuchFieldException
 	 * @throws SecurityException
 	 * @throws IllegalArgumentException
-	 * @throws IllegalAccessException 
+	 * @throws IllegalAccessException
 	 */
 	public static <E, T> int binarySearch(E[] collection, String fieldToSearch, T searchParam) {
 		int leftSearchBound = 0;
@@ -35,7 +43,7 @@ public final class BinarySearchGeneric <E extends Comparable<E>, T extends Compa
 			try {
 				Field field = middleValue.getClass().getDeclaredField(fieldToSearch);
 				field.setAccessible(true);
-				comparison = ((Comparable<T>)field.get(middleValue)).compareTo(searchParam);
+				comparison = ((Comparable<T>) field.get(middleValue)).compareTo(searchParam);
 			} catch (NoSuchFieldException e) {
 				System.out.println("Ошибка! У класса отсутствует поле " + fieldToSearch + " .");
 				e.printStackTrace();
@@ -43,8 +51,8 @@ public final class BinarySearchGeneric <E extends Comparable<E>, T extends Compa
 				System.out.println("Ошибка! Ошибка доступа к полю " + fieldToSearch + " .");
 				e.printStackTrace();
 			} catch (IllegalArgumentException e) {
-				System.out.println("Ошибка! Объект " + middleValue.toString()
-					+ " не является экземпляром класса " + middleValue.getClass().toString() + " .");
+				System.out.println("Ошибка! Объект " + middleValue.toString() + " не является экземпляром класса "
+						+ middleValue.getClass().toString() + " .");
 				e.printStackTrace();
 			} catch (IllegalAccessException e) {
 				System.out.println("Ошибка! Поле в классе " + middleValue.getClass().toString() + " недоступно.");
@@ -65,12 +73,10 @@ public final class BinarySearchGeneric <E extends Comparable<E>, T extends Compa
 
 	// Пример использования
 	public static void main(String[] args) {
-		Animal[] animals = {
-			new Animal.AnimalBuilder().species("СЛОН").eyeColor("КАРИЙ").hasFur(false).build(),
-			new Animal.AnimalBuilder().species("ЖИРАФ").eyeColor("КРАСНЫЙ").hasFur(true).build(),
-			new Animal.AnimalBuilder().species("ЛЕВ").eyeColor("ЗЕЛЁНЫЙ").hasFur(true).build(),
-			new Animal.AnimalBuilder().species("ШИМПАНЗЕ").eyeColor("СИНИЙ").hasFur(true).build()
-		};
+		Animal[] animals = { new Animal.AnimalBuilder().species("СЛОН").eyeColor("КАРИЙ").hasFur(false).build(),
+				new Animal.AnimalBuilder().species("ЖИРАФ").eyeColor("КРАСНЫЙ").hasFur(true).build(),
+				new Animal.AnimalBuilder().species("ЛЕВ").eyeColor("ЗЕЛЁНЫЙ").hasFur(true).build(),
+				new Animal.AnimalBuilder().species("ШИМПАНЗЕ").eyeColor("СИНИЙ").hasFur(true).build() };
 
 		// Отсортировать по параметру поиска
 		Arrays.sort(animals, Comparator.comparing(Animal::getSpecies));

@@ -79,12 +79,34 @@ public final class SingletoneArray {
 		}
 		return storedType.getName();
 	}
+	
+	public String getStoredTypeSimple() {
+		if (size == 0) {
+			return "No elements";
+		}
+		return elements[0].getClass().getSimpleName();
+	}
 
 	public void sort(SortingStrategy<?> strategy) {
 		if (storedType != null && Comparable.class.isAssignableFrom(storedType)) {
 			strategy.sort(elements);
 		} else {
 			throw new IllegalStateException("Elements are not Comparable or no type is set.");
+		}
+	}
+	
+	public Object[] getCopy() {
+		return Arrays.copyOf(elements, size);
+	}
+
+	public void printStored() {
+		if (size == 0)
+		{
+			System.out.println("No entity stored");
+		}
+		
+		for (int i = 0; i < size; i++) {
+			System.out.println((i + 1) + ")" + elements[i].toString());
 		}
 	}
 }
