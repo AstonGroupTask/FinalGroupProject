@@ -13,7 +13,7 @@ public final class SortData extends BaseVariant {
 		System.out.println("Data sort mode selected");
 
 		if (array.isEmpty()) {
-			System.out.println("No entities found \nReturn to main menu");
+			System.out.println("(!)No entities found \n(!)Return to main menu");
 			return;
 		}
 		
@@ -28,11 +28,10 @@ public final class SortData extends BaseVariant {
 			System.out.println("Please, select type of sort:");
 			System.out.println(" 1 - TimSort");
 			System.out.println(" 2 - Custom Sort");
-			System.out.println(" 3 - Quick Sort");
-			System.out.println(" 4 - Exit");
+			System.out.println(" 3 - Exit");
 
 			System.out.print("Please, enter your chosen action: ");
-			validVariant = (int) scannerValidate.getValidValue(TypeValidation.VARIANTS_4);
+			validVariant = (int) scannerValidate.getValidValue(TypeValidation.VARIANTS_3);
 
 			switch (validVariant) {
 			case 1:
@@ -41,14 +40,11 @@ public final class SortData extends BaseVariant {
 			case 2:
 				sort(customSortMenu());
 				break;
-			case 3:
-				sort(new QuickSort());
-				break;
 			default:
 				break;
 			}
 
-			if (validVariant == 4) {
+			if (validVariant == 3) {
 				System.out.println("Return to main menu");
 				break;
 			}

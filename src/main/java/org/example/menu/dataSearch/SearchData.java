@@ -19,7 +19,7 @@ public final class SearchData extends BaseVariant {
 			System.out.println("Data search mode selected");
 
 			if (array.isEmpty()) {
-				System.out.println("No entities found \nReturn to main menu");
+				System.out.println("(!)No entities found \n(!)Return to main menu");
 				return;
 			}
 
