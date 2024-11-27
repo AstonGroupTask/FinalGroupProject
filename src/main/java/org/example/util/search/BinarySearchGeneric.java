@@ -35,6 +35,8 @@ public final class BinarySearchGeneric<E extends Comparable<E>, T extends Compar
 		int leftSearchBound = 0;
 		int rightSearchBound = collection.length - 1;
 
+		String searchParamStr = String.valueOf(searchParam);
+
 		while (leftSearchBound <= rightSearchBound) {
 			int middleIndex = (leftSearchBound + rightSearchBound) / 2;
 			E middleValue = collection[middleIndex];
@@ -43,7 +45,8 @@ public final class BinarySearchGeneric<E extends Comparable<E>, T extends Compar
 			try {
 				Field field = middleValue.getClass().getDeclaredField(fieldToSearch);
 				field.setAccessible(true);
-				comparison = ((Comparable<T>) field.get(middleValue)).compareTo(searchParam);
+				String fieldValueStr = String.valueOf(field.get(middleValue));
+				comparison = fieldValueStr.compareTo(searchParamStr);
 			} catch (NoSuchFieldException e) {
 				System.out.println("Ошибка! У класса отсутствует поле " + fieldToSearch + " .");
 				e.printStackTrace();
@@ -71,20 +74,16 @@ public final class BinarySearchGeneric<E extends Comparable<E>, T extends Compar
 		return -1;
 	}
 
-	// Пример использования
 	public static void main(String[] args) {
 		Animal[] animals = { new Animal.AnimalBuilder().species("СЛОН").eyeColor("КАРИЙ").hasFur(false).build(),
 				new Animal.AnimalBuilder().species("ЖИРАФ").eyeColor("КРАСНЫЙ").hasFur(true).build(),
 				new Animal.AnimalBuilder().species("ЛЕВ").eyeColor("ЗЕЛЁНЫЙ").hasFur(true).build(),
 				new Animal.AnimalBuilder().species("ШИМПАНЗЕ").eyeColor("СИНИЙ").hasFur(true).build() };
 
-		// Отсортировать по параметру поиска
 		Arrays.sort(animals, Comparator.comparing(Animal::getSpecies));
 
-		// Получить индекс в массиве, по которому нашелся объект с параметром
 		int locatedAtIndex = BinarySearchGeneric.binarySearch(animals, "species", "ЛЕВ");
 
-		// Вывести результат поиска
 		if (locatedAtIndex == -1) {
 			System.out.println("Запрос не найден");
 		} else {
