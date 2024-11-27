@@ -10,6 +10,11 @@ public final class FileWriterData extends BaseVariant {
 	public void menu() {
 		System.out.println("Data File Write mode selected");
 		
+		if (array.isEmpty()) {
+			System.out.println("(!)No entities found \n(!)Return to main menu");
+			return;
+		}
+		
 		System.out.println("Stored entities:");
 		System.out.println("=====================================");
 		array.printStored();
