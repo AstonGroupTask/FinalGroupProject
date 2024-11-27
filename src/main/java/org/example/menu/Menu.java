@@ -43,7 +43,7 @@ public final class Menu {
 			array.printStored();
 			System.out.println("=====================================");
 			
-			System.out.println("Please, select one of three variants:");
+			System.out.println("Please, select one of five variants:");
 			System.out.println(" 1 - Enter");
 			System.out.println(" 2 - Sort");
 			System.out.println(" 3 - Search");
