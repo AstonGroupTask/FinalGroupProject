@@ -6,7 +6,7 @@ public enum TypeValidation {
 	FLOAT(Float.class, 0.0f, 100.0f, false, null), 
 	BOOLEAN(Boolean.class, 0, 0, false, null),
 
-	STRING_RUS(String.class, 1, 99, true, "^[A-Za-z0-9\u0400-\u04FF.,]+$"),
+	STRING_RUS(String.class, 1, 99, true, "^[A-Za-z0-9\\u0400-\\u04FF\\u0401\\u0410-\\u042F.,]+$"),
 	STRING_FILE_PATH(String.class, 1, 99, true, "^([A-Za-z]:\\\\|/)?([A-Za-z0-9_\\-\\/\\\\.]+(?:[\\/\\\\][A-Za-z0-9_\\-\\.]+)*)$"),
 	STRING_EMPTY(String.class, 1, 99, true, "^[A-Za-z0-9]*$"),
 	
